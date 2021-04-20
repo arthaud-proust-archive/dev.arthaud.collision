@@ -20,10 +20,30 @@ module.exports = {
         ctx.closePath();
     },
 
+    drawCircle: function(ctx, coords, radius, opts={}) {
+        ctx[(opts.style??'fill')+'Style'] = opts.color??'black';
+        ctx.beginPath();
+        ctx.arc(
+            coords.x, // x
+            coords.y, // y
+            radius,        // rayon
+            0,             // angle de départ de l'ac
+            2 * Math.PI    // angle de fin
+        );
+        ctx[opts.style ?? 'fill']();
+        ctx.closePath();
+    },
+
     drawText: function(ctx, coords, text, opts={}) {
         ctx.fillStyle="black";
         ctx.font = `${opts.size??'48px'} ${opts.font??'serif'}`;
         ctx.fillText(text, coords.x, coords.y);
+    },
+
+    distance: function(c1, c2) {
+        let dx = c1.x-c2.x;
+        let dy = c1.y-c2.y;
+        return Math.abs(Math.sqrt(dx**2 + dy**2)) // d
     },
 
     rotate: function(speed, angle) {

@@ -1,4 +1,5 @@
 const Particle = require('./particle');
+const Cursor = require('./cursor');
 // const SupList = require('./supList');
 const UTILS = require('./utils');
 const { v4: uuidv1 } = require('uuid');
@@ -28,8 +29,9 @@ export default class Simulation {
         this.playing = opts.autoPlay ?? true;
         this.t = 0;
 
+        this.rect = this.canvas.getBoundingClientRect();
+        this.cursor = new Cursor(this);
     }
-
 
     get particlesUUIDs() {
         return Object.keys(this.particles)
@@ -53,7 +55,8 @@ export default class Simulation {
         if(!this.playing) return;
         this.animFrame = requestAnimationFrame(()=>this.anim());
         // setTimeout(()=>this.anim(), 1000/this.fps);
-    }
+        this.cursor.draw();
+    }   
 
     init() {
         cancelAnimationFrame(this.animFrame);

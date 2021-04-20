@@ -271,6 +271,8 @@ const TEMPLATES = [
 
     function(opts={}) {
         let s= new Simulation({
+            width: 300*254/127,
+            height: 300,
             // showLines: true,
             // showDirections: true,
             parent: document.getElementById('watcher'),
@@ -284,14 +286,18 @@ const TEMPLATES = [
             ...opts
         });
         s.init();
+        s.cursor.enable();
 
+        const friction = ()=>0.986
         s.addParticle({
             color: "white",
+            draggable:true,
             coords: {
                 x:s.w/5,
                 y:s.h/2,
-                // vx:10,
-                // vy:0.1
+                vx:20,
+                vy:0.1,
+                friction
             }
         });
 
@@ -316,7 +322,8 @@ const TEMPLATES = [
                     color: n==4?"black":randomPick(red, orange),
                     coords: {
                         x: 3*s.w/5 + i*30, // s.w -> largeur du cadre
-                        y: s.h/2 + k*30 - 15 * i
+                        y: s.h/2 + k*30 - 15 * i,
+                        friction
                     }
                 });
                 n++;

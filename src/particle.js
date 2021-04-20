@@ -12,14 +12,15 @@ module.exports = class Particle {
         this.density = opts.density ?? 1;
         this.color = opts.color ?? 'black';
         this.style = opts.style ?? 'fill';
-
+        this.draggable = opts.draggable??false;
         // hauteur et largeur (mètres)
         this.h = 
         this.w = this.mass * this.density;
 
-        this.coords = new Mover(opts.coords ?? {
-            vx:1,
-            vy:1
+        this.coords = new Mover({
+            vx:0,
+            vy:0,
+            ...opts.coords
         });
     }
 
@@ -35,12 +36,32 @@ module.exports = class Particle {
         return 1/2 * this.mass * this.v**2
     }
 
+    get hover() {
+        return UTILS.distance(this.simulation.cursor.coords, this.coords)<=this.h
+    }
+
+    get grab() {
+        return this.hover && this.simulation.cursor.click
+    }
+
     update() {
         this.draw();
+        if(this.draggable && this.grab) {
+            this.simulation.cursor.aim(this);
+        }
         this.checkWallCollision();
         // this.checkWallCollisionV2();
         this.checkParticleCollision();
         this.coords.update();
+        // if(this.color=="white") {
+            // console.log(this.coords.speedValue);
+        // }
+    }
+
+    cursorCallback(cursor) {
+        console.log(this);
+        this.coords.vx = 0.2 * (this.coords.x - cursor.coords.x) ;
+        this.coords.vy = 0.2 * (this.coords.y - cursor.coords.y);
     }
 
     draw() {
@@ -49,7 +70,7 @@ module.exports = class Particle {
         this.ctx.arc(
             this.coords.x, // x
             this.coords.y, // y
-            this.h,        // rayon
+            this.h*(this.hover&&this.draggable?1.2:1),        // rayon
             0,             // angle de départ de l'ac
             2 * Math.PI    // angle de fin
         );

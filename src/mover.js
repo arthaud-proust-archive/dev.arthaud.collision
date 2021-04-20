@@ -7,6 +7,7 @@ module.exports = class Mover {
             vy:0,
             ax:0,
             ay:0,
+            friction: ()=>1
         };
 
         this._types = {
@@ -15,6 +16,7 @@ module.exports = class Mover {
             acceleration: 'a'
         }
 
+        console.log(params);
         Object.entries(this._defaultParams).forEach(([key, value])=>{
             this[key] = params[key] ?? value;
         })
@@ -32,11 +34,20 @@ module.exports = class Mover {
                 // this[prefix+'y'] = coords.y || this[prefix+'y'];
             }
         });
+
+        console.log(this.vx);
     }
 
     update() {
-        this.x += this.vx;
-        this.y += this.vy;
+        this.vx = this.ax + this.friction() * this.vx;
+        this.vy = this.ay + this.friction() * this.vy;
+
+        // console.log(this.vx * this.friction());
+        this.x += this.vx ;
+        this.y += this.vy ;
+    }
+    get speedValue() {
+        return Math.sqrt(this.vx**2 + this.vy**2)
     }
 
     get getSpeed() {
