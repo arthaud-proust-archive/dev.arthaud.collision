@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "watch": "webpack --watch",
+    "dev": "php -S localhost:8000 && webpack --watch"
+  },
+  "dependencies": {
+    "uuid": "^3.4.0"
+  }
+}

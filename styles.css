@@ -1,0 +1,82 @@
+body {
+    font-family: Segoe UI, Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:0;
+    margin:0;
+    padding-bottom: 100px;
+}
+
+.badge {
+    text-decoration: none;
+    position: fixed;
+    --radius: 20px;
+    align-self: flex-end;
+    background: #0f0f0f4f;
+    color: rgb(243, 243, 243);
+    margin: 10px;
+    margin-right: 0;
+    padding: 12px 15px;
+    border-radius: var(--radius) 0 0 var(--radius);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.badge .img {
+    height: 50px;
+    border-radius: 9999px;
+}
+
+.badge .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: flex-end; */
+    padding: 0 20px;
+}
+
+.badge * {
+    margin: 0;
+}
+.badge .title {
+    line-height: 1.3;
+    font-weight: 100;
+}
+
+.badge .subtitle {
+    line-height: 1.1;
+    font-weight: 400;
+    margin: 0;
+    color:rgb(206, 206, 206);
+}
+
+h1 {
+    margin: 50px 0;
+    font-size: 4rem;
+}
+#controls {
+    margin-bottom: 30px;
+}
+#controls button {
+    border:none;
+    padding: 7px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#watcher {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.simulation {
+    border-radius: 5px;
+    display: block;
+    margin: 20px;
+    box-sizing: border-box;
+    box-shadow: -1px 1px 20px 11px #1c1c1c1c;;
+}
