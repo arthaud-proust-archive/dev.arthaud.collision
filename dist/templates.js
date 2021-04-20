@@ -1,7 +1,4 @@
-const Simulation = require('./simulation.js');
-
-module.exports = [
-
+const TEMPLATES = [
     function(opts={}) {
         let s= new Simulation({
             // width: innerWidth,

@@ -3,7 +3,7 @@ const Particle = require('./particle');
 const UTILS = require('./utils');
 const { v4: uuidv1 } = require('uuid');
 
-module.exports = class Simulation {
+export default class Simulation {
     constructor(opts = {}) {
         this.showDirections = opts.showDirections ?? false;
         this.showLines = opts.showLines ?? false;

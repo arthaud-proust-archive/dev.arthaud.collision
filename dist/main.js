@@ -1,5 +1,3 @@
-const Simulation = require('./simulation');
-const TEMPLATES = require('./templates');
 var simulations = [];
 // s.init();
 // addEventListener('resize', () => s.size())

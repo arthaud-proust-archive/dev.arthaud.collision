@@ -2,11 +2,13 @@ const webpack = require("webpack");
 const path = require('path');
 
 module.exports = {
-    mode: 'development',
-    entry: './src/main.js',
+    mode: 'production',
+    entry: './src/entry.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: 'simulation.js',
+        libraryTarget: "umd",
+        library: "Simulation",
     },
     module: {
         rules: [{
