@@ -13,6 +13,7 @@ pauseBtn.addEventListener('click', ()=> {
     simulations.forEach(s=>s.pause())
 });
 
+simulations.push(TEMPLATES[8]())
 simulations.push(TEMPLATES[0]())
 simulations.push(TEMPLATES[1]())
 simulations.push(TEMPLATES[2]())

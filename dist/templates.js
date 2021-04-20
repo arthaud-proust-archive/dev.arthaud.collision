@@ -268,4 +268,63 @@ const TEMPLATES = [
         return s;
     },
 
+
+    function(opts={}) {
+        let s= new Simulation({
+            // showLines: true,
+            // showDirections: true,
+            parent: document.getElementById('watcher'),
+            toSummon:0,
+            fps: 70,
+            background: "green",
+            particleOpts: {
+                color: "#888",
+                mass:15
+            },
+            ...opts
+        });
+        s.init();
+
+        s.addParticle({
+            color: "white",
+            coords: {
+                x:s.w/5,
+                y:s.h/2,
+                // vx:10,
+                // vy:0.1
+            }
+        });
+
+
+        const randomPick = function(array1, array2) {
+            let r = Math.round(Math.random());
+            let toShift = r===1?array1:array2;
+            let other = r===1?array2:array1;
+            if(toShift.length>0) {
+                return toShift.shift()
+            } else if(other.length>0) {
+                return other.shift();
+            }
+        }
+        let red = Array(7).fill('red');
+        let orange = Array(7).fill('orange');
+        let n = 0;
+        for (let i=0; i<5; i++) { // i -> 0 à 4
+
+            for(let k=0; k<=i; k++) { // k -> 0à0, puis de 0à1, puis de 0à2 ... puis de 0à4
+                s.addParticle({
+                    color: n==4?"black":randomPick(red, orange),
+                    coords: {
+                        x: 3*s.w/5 + i*30, // s.w -> largeur du cadre
+                        y: s.h/2 + k*30 - 15 * i
+                    }
+                });
+                n++;
+            }
+        }
+        console.log(n);
+
+        return s;
+    },
+
 ];
