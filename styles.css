@@ -57,6 +57,8 @@ h1 {
     font-size: 4rem;
 }
 #controls {
+    display: flex;
+    flex-flow: row nowrap;
     margin-bottom: 30px;
 }
 #controls button {
@@ -64,6 +66,19 @@ h1 {
     padding: 7px 14px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+#controls a {
+    margin: 5px;
+    background: #0f0f0f;
+    border:none;
+    padding: 7px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color:rgb(206, 206, 206)
 }
 #watcher {
     display: flex;
