@@ -1,13 +1,16 @@
 const UTILS = require('./utils');
 
 module.exports = class Cursor {
-    constructor(simulation, opts = []) {
+    constructor(simulation, opts = {}) {
         this.simulation = simulation;
         this.x=opts.x??-100;
         this.y=opts.y??-100;
         this.click = false;
         this.aimed = undefined;
-        this.enabled = false;
+        this.enabled = opts.enabled??false;
+        if(opts.enabled) {
+            this.enable();
+        }
     }
 
     enable() {

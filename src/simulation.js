@@ -2,7 +2,7 @@ const Particle = require('./particle');
 const Cursor = require('./cursor');
 // const SupList = require('./supList');
 const UTILS = require('./utils');
-const { v4: uuidv1 } = require('uuid');
+const { v1: uuidv1 } = require('uuid');
 
 export default class Simulation {
     constructor(opts = {}) {
@@ -12,7 +12,7 @@ export default class Simulation {
         this.w = opts.width ?? 400;
         this.ratio = this.w/this.h; // utilisé pour le redimensionnement
         this.toSummon = opts.toSummon ?? 10;
-        this.fps = opts.fps ?? 20;
+        this.fps = opts.fps ?? 40;
         this.particles = {};
         this.particleOpts = opts.particleOpts ?? {
             mass: 5
@@ -42,6 +42,7 @@ export default class Simulation {
     get particlesUUIDs() {
         return Object.keys(this.particles)
     }
+
     setFPS(fps) {
         this.fps = fps;
     }
