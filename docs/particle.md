@@ -1,6 +1,11 @@
 # Documentation particle.js
 
 ## Créer une particule
+Arguments:
+- [Simulation]()  
+- OPTIONS: Voir paragraphe #Options
+
+Exemple:  
 ```js
 new Particle(
     Simulation:simulation, 
@@ -9,10 +14,7 @@ new Particle(
 
 ```
 
-## Options
-- ``  
-Type:  
-Défaut:  
+## Options 
 - `mass`  
 Type: Number  
 Défaut: 10  
