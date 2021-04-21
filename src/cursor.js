@@ -8,20 +8,31 @@ module.exports = class Cursor {
         this.click = false;
         this.aimed = undefined;
         this.enabled = false;
-
-
     }
 
     enable() {
         this.enabled = true;
-        this.simulation.canvas.addEventListener('mousemove', e=>this.set(e));
-        this.simulation.canvas.addEventListener('mouseleave', e=>{
-            this.mouseUp();
-            this.x=-100;
-            this.y=-100;
-        });
-        this.simulation.canvas.addEventListener('mousedown', e=>this.click=true);
+        this.simulation.canvas.addEventListener('mousemove', e=>this.place(e));
+        this.simulation.canvas.addEventListener('mouseleave', ()=>this.mouseUp());
+        this.simulation.canvas.addEventListener('mousedown', ()=>this.mouseDown());
         this.simulation.canvas.addEventListener('mouseup', ()=>this.mouseUp());
+
+        this.simulation.canvas.addEventListener("touchstart", ()=>this.mouseDown(), false);
+        this.simulation.canvas.addEventListener("touchend", ()=>this.mouseUp(), false);
+        this.simulation.canvas.addEventListener("touchcancel", ()=>this.handleCancel(), false);
+        this.simulation.canvas.addEventListener("touchleave", ()=>this.mouseUp, false);
+        this.simulation.canvas.addEventListener("touchmove", e=>this.place(e), false);
+    }
+
+    handleCancel() {
+        this.click=false
+        this.aimed=undefined;
+        this.x=-100;
+        this.y=-100;
+    }
+
+    mouseDown() {
+        this.click=true;
     }
 
     mouseUp() {
@@ -30,6 +41,8 @@ module.exports = class Cursor {
             this.aimed.cursorCallback(this);
         }
         this.aimed=undefined;
+        this.x=-100;
+        this.y=-100;
     }
 
     get module() {
@@ -43,9 +56,22 @@ module.exports = class Cursor {
         }
     }
     
-    set(e) {
-        this.x = e.pageX - this.simulation.rect.x;
-        this.y = e.pageY - this.simulation.rect.y;
+    place(e) {
+        e.preventDefault();
+        var page = {};
+        if(e.changedTouches) {
+            page = {
+                x: e.changedTouches[0].pageX,
+                y: e.changedTouches[0].pageY
+            };
+        } else {
+            page = {x:e.pageX,y: e.pageY};
+        }
+
+        console.log(page);
+        this.x = page.x - this.simulation.rect.x;
+        this.y = page.y - this.simulation.rect.y;
+
     }
 
     draw() {

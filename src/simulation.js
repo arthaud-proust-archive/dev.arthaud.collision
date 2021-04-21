@@ -10,6 +10,7 @@ export default class Simulation {
         this.showLines = opts.showLines ?? false;
         this.h = opts.height ?? 300;
         this.w = opts.width ?? 400;
+        this.ratio = this.w/this.h; // utilisé pour le redimensionnement
         this.toSummon = opts.toSummon ?? 10;
         this.fps = opts.fps ?? 20;
         this.particles = {};
@@ -31,6 +32,11 @@ export default class Simulation {
 
         this.rect = this.canvas.getBoundingClientRect();
         this.cursor = new Cursor(this);
+
+        if(this.w > document.body.offsetWidth) {
+            this.w = this.canvas.parentElement.offsetWidth * 0.9;
+            this.h = this.w/this.ratio;
+        }
     }
 
     get particlesUUIDs() {

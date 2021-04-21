@@ -15,6 +15,7 @@ const TEMPLATES = [
             ...opts
             // autoPlay: false
         });
+        s.particleOpts.mass = 35-s.w/50;
         s.init();
         return s;
     },
@@ -178,6 +179,7 @@ const TEMPLATES = [
             },
             ...opts
         });
+
         s.init();
         
         s.addParticles([{
@@ -226,6 +228,7 @@ const TEMPLATES = [
             ...opts
             // autoPlay: false
         });
+        s.particleOpts.mass = 35-s.w/50;
         s.init();
         return s;
     },
@@ -288,15 +291,19 @@ const TEMPLATES = [
         s.init();
         s.cursor.enable();
 
+        const mass = s.w/30;
         const friction = ()=>0.986
         s.addParticle({
             color: "white",
             draggable:true,
+            mass,
             coords: {
                 x:s.w/5,
                 y:s.h/2,
-                vx:20,
-                vy:0.1,
+                // vx:20,
+                // vy:0.1,
+                vx:0,
+                vy:0,
                 friction
             }
         });
@@ -320,9 +327,10 @@ const TEMPLATES = [
             for(let k=0; k<=i; k++) { // k -> 0à0, puis de 0à1, puis de 0à2 ... puis de 0à4
                 s.addParticle({
                     color: n==4?"black":randomPick(red, orange),
+                    mass,
                     coords: {
-                        x: 3*s.w/5 + i*30, // s.w -> largeur du cadre
-                        y: s.h/2 + k*30 - 15 * i,
+                        x: 3*s.w/5 + i*mass*2, // s.w -> largeur du cadre
+                        y: s.h/2 + k*mass*2 - mass * i,
                         friction
                     }
                 });

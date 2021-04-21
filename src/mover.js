@@ -16,7 +16,6 @@ module.exports = class Mover {
             acceleration: 'a'
         }
 
-        console.log(params);
         Object.entries(this._defaultParams).forEach(([key, value])=>{
             this[key] = params[key] ?? value;
         })
@@ -34,8 +33,6 @@ module.exports = class Mover {
                 // this[prefix+'y'] = coords.y || this[prefix+'y'];
             }
         });
-
-        console.log(this.vx);
     }
 
     update() {
