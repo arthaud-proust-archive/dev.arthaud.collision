@@ -1,6 +1,6 @@
 {
-    "short_name": "Collisions",
-    "name": "Collisions",
+    "short_name": "Collision",
+    "name": "Collision",
     "description": "Simulation de physique/collisions",
     "icons": [
         {
