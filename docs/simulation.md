@@ -52,9 +52,6 @@ Par défaut: `'black'`
 - `autoPlay` : Lance l'animation dès l'initialisation de l'animation  
 Type: Boolean  
 Par défaut: `true` 
-- `` : txt  
-Type: type  
-Par défaut: `` 
 
 # Méthodes
 
